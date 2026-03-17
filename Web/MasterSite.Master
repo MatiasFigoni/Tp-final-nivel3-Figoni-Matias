@@ -1,10 +1,10 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterSite.master.cs" Inherits="Web.MasterSite" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterSite.Master.cs" Inherits="Web.MasterSite" %>
 
 <!DOCTYPE html>
 
 <html>
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="Content\bootstrap.css" rel="stylesheet" />
     <script src="Scripts/bootstrap.js"></script>
     <title></title>
@@ -13,10 +13,38 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Navbar</span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    </div>
+                </div>
+            </div>
+            <div class=" container-fluid justify-content-start justify-content-lg-end">
+                <a href="LogIn.aspx?new=false" class="btn btn-outline-primary me-2">Log In</a>
+                <a href="LogIn.aspx?new=true" class="btn btn-outline-secondary me-2">Sign In</a>
+            </div>
+
+
+        </nav>
         <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+        <footer>
+            <div class="container bg-dark-tertiary">
+                <br />
+                <h6 class="opacity-75">Todos los derechos reservados</h6>
+            </div>
+        </footer>
     </form>
 </body>
 </html>
