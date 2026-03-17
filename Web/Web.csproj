@@ -84,7 +84,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Default.aspx" />
-    <Content Include="LogIn.aspx" />
+    <Content Include="LogInUsuario.aspx" />
+    <Content Include="RegistrarUsuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -101,12 +102,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LogIn.aspx.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
+    <Compile Include="LogInUsuario.aspx.cs">
+      <DependentUpon>LogInUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LogIn.aspx.designer.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
+    <Compile Include="LogInUsuario.aspx.designer.cs">
+      <DependentUpon>LogInUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterSite.Master.cs">
       <DependentUpon>MasterSite.Master</DependentUpon>
@@ -116,6 +117,13 @@
       <DependentUpon>MasterSite.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrarUsuario.aspx.cs">
+      <DependentUpon>RegistrarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RegistrarUsuario.aspx.designer.cs">
+      <DependentUpon>RegistrarUsuario.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css.map" />

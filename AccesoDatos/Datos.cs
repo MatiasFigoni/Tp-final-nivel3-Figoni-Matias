@@ -16,7 +16,7 @@ namespace AccesoDatos
         private SqlDataReader lector;
         public Datos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATAGOLO_WEB_DB; integrated security=true");
+            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
             comando = new SqlCommand();
         }
         public SqlDataReader Lector

@@ -29,8 +29,8 @@
                 </div>
             </div>
             <div class=" container-fluid justify-content-start justify-content-lg-end">
-                <a href="LogIn.aspx?new=false" class="btn btn-outline-primary me-2">Log In</a>
-                <a href="LogIn.aspx?new=true" class="btn btn-outline-secondary me-2">Sign In</a>
+                <a href="LogInUsuario.aspx" class="btn btn-outline-primary me-2">Log In</a>
+                <a href="RegistrarUsuario.aspx" class="btn btn-outline-secondary me-2">Sign In</a>
             </div>
 
 
