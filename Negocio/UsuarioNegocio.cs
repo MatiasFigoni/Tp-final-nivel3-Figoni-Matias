@@ -2,6 +2,7 @@
 using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,22 @@ namespace Negocio
             }
             finally { datos.cerrarConexion(); }
 
+        }
+        public void Registrarse(Usuario user)
+        {
+            Datos datos = new Datos();
+            try
+            {
+                datos.setearConsulta("insert into USERS (email,pass) values (@email,@pass)");
+                datos.setearParametro("@email",user.Email);
+                datos.setearParametro("@pass",user.Pass);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { datos.cerrarConexion(); }
         }
     }
 }

@@ -14,34 +14,40 @@ namespace Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
-                Usuario usuario = new Usuario();
-                if (!(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text)))
+            Usuario usuario = new Usuario();
+            if (!(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text)))
+            {
+                usuario.Email = txtEmail.Text;
+                usuario.Pass = txtPass.Text;
+                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                if (usuarioNegocio.logIn(usuario))
                 {
-                    usuario.Email = txtEmail.Text;
-                    usuario.Pass = txtPass.Text;
-                    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                    if (usuarioNegocio.logIn(usuario))
-                    {
-                        Session.Add("Usuario", usuario);
-                    }
-                    else
-                    {
-                        //Enviar pagina de error de error con su usuario o contraseña
-                    }
+                    Session.Add("Usuario", usuario);
+                    Response.Redirect("~/Default.aspx", false);
                 }
-                else if (string.IsNullOrEmpty(txtEmail.Text))
+                else
                 {
-                    txtEmail.CssClass = "form-control is-invalid";
+                    //Enviar pagina de error de error con su usuario o contraseña
                 }
-                else if (string.IsNullOrEmpty(txtPass.Text))
-                {
-                    txtPass.CssClass = "form-control is-invalid";
-                }
+            }
+            camposVacios();
+        }
+        private void camposVacios()
+        {
+            if (string.IsNullOrEmpty(txtEmail.Text))
+                txtEmail.CssClass = "form-control is-invalid";
+            else
+                txtEmail.CssClass = "form-control";
+
+            if (string.IsNullOrEmpty(txtPass.Text))
+                txtPass.CssClass = "form-control is-invalid";
+            else
+                txtPass.CssClass = "form-control";
         }
     }
 }

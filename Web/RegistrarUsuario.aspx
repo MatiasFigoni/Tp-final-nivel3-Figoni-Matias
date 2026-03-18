@@ -8,7 +8,7 @@
         <div class="col-4">
             <div class="mb-2">
                 <asp:Label Text="Email" runat="server" CssClass="form-label" />
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" placeholder="ejmplo@ejemplo.com"></asp:TextBox>
                 <div class=" invalid-feedback">
                     Por favor, complete el campo...
                 </div>
