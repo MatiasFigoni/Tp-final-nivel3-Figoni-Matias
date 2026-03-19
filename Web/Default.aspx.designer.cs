@@ -13,5 +13,23 @@ namespace Web
 
     public partial class Default1
     {
+
+        /// <summary>
+        /// Control lblBienvenida.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBienvenida;
+
+        /// <summary>
+        /// Control repArticulos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repArticulos;
     }
 }

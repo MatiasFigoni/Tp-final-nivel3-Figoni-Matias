@@ -16,7 +16,7 @@ namespace Negocio
 			Datos datos = new Datos();
 			try
 			{
-				datos.setearConsulta("select A.Id, A.Codigo, A.Descripcion, A.Nombre, A.Precio, A.ImagenUrl, C.Descripcion 'Categoria', M.Descripcion 'Marca' from ARTICULOS A, CATEGORIAS C, MARCAS Mwhere A.IdCategoria = C.Id and A.IdMarca = M.Id");
+				datos.setearConsulta("select A.Id, A.Codigo, A.Descripcion, A.Nombre, A.Precio, A.ImagenUrl, C.Descripcion 'Categoria', M.Descripcion 'Marca' from ARTICULOS A, CATEGORIAS C, MARCAS M where A.IdCategoria = C.Id and A.IdMarca = M.Id");
 				datos.ejecutarLector();
 				while (datos.Lector.Read())
 				{
