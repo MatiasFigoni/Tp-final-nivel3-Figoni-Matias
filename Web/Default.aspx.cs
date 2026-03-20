@@ -16,7 +16,8 @@ namespace Web
             if (!IsPostBack)
             {
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                repArticulos.DataSource = articuloNegocio.listar();
+                Session.Add("ListaArticulos", articuloNegocio.listar());
+                repArticulos.DataSource = (List<Articulo>)Session["ListaArticulos"];
                 repArticulos.DataBind();
             }
             if (Session["Usuario"] != null)

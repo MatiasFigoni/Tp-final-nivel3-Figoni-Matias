@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ABMArticulo.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -85,6 +86,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="DescripcionArticulo.aspx" />
+    <Content Include="ListadoArticulos.aspx" />
     <Content Include="LogInUsuario.aspx" />
     <Content Include="RegistrarUsuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -96,6 +98,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABMArticulo.aspx.cs">
+      <DependentUpon>ABMArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ABMArticulo.aspx.designer.cs">
+      <DependentUpon>ABMArticulo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -109,6 +118,13 @@
     </Compile>
     <Compile Include="DescripcionArticulo.aspx.designer.cs">
       <DependentUpon>DescripcionArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoArticulos.aspx.cs">
+      <DependentUpon>ListadoArticulos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListadoArticulos.aspx.designer.cs">
+      <DependentUpon>ListadoArticulos.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogInUsuario.aspx.cs">
       <DependentUpon>LogInUsuario.aspx</DependentUpon>
