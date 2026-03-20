@@ -18,6 +18,7 @@ namespace Web
             if (!IsPostBack)
             {
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                Session.Add("ListaArticulos", articuloNegocio.listar());
                 dgvArticulos.DataSource = (List<Articulo>)Session["ListaArticulos"];
                 dgvArticulos.DataBind();
             }

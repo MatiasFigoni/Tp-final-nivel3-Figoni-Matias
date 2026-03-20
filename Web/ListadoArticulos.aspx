@@ -72,6 +72,7 @@
                     </Columns>
                 </asp:GridView>
             </div>
+            <a href="ABMArticulo.aspx" class="btn btn-primary">Agregar articulo</a>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
