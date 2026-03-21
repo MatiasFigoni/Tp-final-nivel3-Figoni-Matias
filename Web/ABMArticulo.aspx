@@ -30,6 +30,9 @@
             <div class="mb-3">
                 <asp:Label ID="lblPrecio" runat="server" Text="Precio" CssClass="form-label"></asp:Label>
                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control"></asp:TextBox>
+                <div class="invalid-feedback">
+                    Por favor, ingrese solo numeros.
+                </div>
             </div>
         </div>
         <div class="col">
@@ -79,6 +82,7 @@
             <div class="mt-3 mb-3">
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">
                     Eliminar
+               
                 </button>
             </div>
         </div>

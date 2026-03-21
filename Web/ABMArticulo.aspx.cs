@@ -17,7 +17,8 @@ namespace Web
         {
             try
             {
-                MostrarBotonEliminar = false;
+                if (Request.QueryString["id"]!=null) 
+                    MostrarBotonEliminar = true;
                 MostrarConfirmacion = false;
                 if (!IsPostBack)
                 {
@@ -51,7 +52,6 @@ namespace Web
                         ddlCategoria.SelectedValue = artFiltrado.Categoria.Id.ToString();
 
                         MostrarBotonEliminar = true;
-
                     }
                 }
             }
@@ -93,17 +93,33 @@ namespace Web
             }
 
         }
-
+        private bool onlyNumbers(string cadena)
+        {
+            foreach (char c in cadena)
+            {
+                if (!char.IsNumber(c))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             Articulo aux = new Articulo();
             aux.Codigo = txtCodigo.Text;
             aux.Descripcion = txtDescripcion.Text;
             aux.Nombre = txtNombre.Text;
-            if (!(string.IsNullOrEmpty(txtPrecio.Text)))
+            if (!(string.IsNullOrEmpty(txtPrecio.Text)) && onlyNumbers(txtPrecio.Text))
+            {
                 aux.Precio = decimal.Parse(txtPrecio.Text);
-            else
-                aux.Precio = 0;
+                txtPrecio.CssClass = "form-control";
+            }
+            else if ((!onlyNumbers(txtPrecio.Text) && !(string.IsNullOrEmpty(txtPrecio.Text))) || string.IsNullOrEmpty(txtPrecio.Text))
+            {
+                txtPrecio.CssClass = "form-control is-invalid";
+                return;
+            }
             aux.UrlImagen = txtUrlImagen.Text;
 
             aux.Categoria = new Categoria();
