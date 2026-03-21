@@ -35,7 +35,7 @@ namespace Web
             }
             catch (Exception ex)
             {
-                throw ex;
+                cargarError(ex);
             }
         }
 
@@ -77,8 +77,13 @@ namespace Web
             }
             catch (Exception ex)
             {
-                throw ex;
+                cargarError(ex);
             }
+        }
+        private void cargarError(Exception ex)
+        {
+            Session.Add("Error", ex.ToString());
+            Response.Redirect("~/Error.aspx", false);
         }
     }
 }

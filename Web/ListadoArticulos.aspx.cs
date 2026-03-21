@@ -17,10 +17,17 @@ namespace Web
             FiltroAvanzado = cbxActivarFiltroAvanzado.Checked;
             if (!IsPostBack)
             {
-                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                Session.Add("ListaArticulos", articuloNegocio.listar());
-                dgvArticulos.DataSource = (List<Articulo>)Session["ListaArticulos"];
-                dgvArticulos.DataBind();
+                try
+                {
+                    ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                    Session.Add("ListaArticulos", articuloNegocio.listar());
+                    dgvArticulos.DataSource = (List<Articulo>)Session["ListaArticulos"];
+                    dgvArticulos.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    cargarError(ex);
+                }
             }
         }
 
@@ -34,7 +41,7 @@ namespace Web
         protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
         {
             string id = dgvArticulos.SelectedDataKey.Value.ToString();
-            Response.Redirect("ABMArticulo.aspx?id=" + id,false);
+            Response.Redirect("ABMArticulo.aspx?id=" + id, false);
         }
 
         private bool onlyNumbers(string cadena)
@@ -96,9 +103,22 @@ namespace Web
         }
         protected void txtFiltro_TextChanged(object sender, EventArgs e)
         {
-            List<Articulo> listaFiltrada = ((List<Articulo>)Session["ListaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
-            dgvArticulos.DataSource = listaFiltrada;
-            dgvArticulos.DataBind();
+            try
+            {
+                List<Articulo> listaFiltrada = ((List<Articulo>)Session["ListaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+                dgvArticulos.DataSource = listaFiltrada;
+                dgvArticulos.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                cargarError(ex);
+            }
+        }
+        private void cargarError(Exception ex)
+        {
+            Session.Add("Error", ex.ToString());
+            Response.Redirect("~/Error.aspx", false);
         }
     }
 }

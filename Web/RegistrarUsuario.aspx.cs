@@ -21,23 +21,27 @@ namespace Web
         {
             Usuario usuario = new Usuario();
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            if (!(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text)) && isEmail(txtEmail.Text))
+            try
             {
-                usuario.Email = txtEmail.Text;
-                usuario.Pass = txtPass.Text;
-                usuarioNegocio.registrarse(usuario);
-                Session.Add("Usuario", usuario);
-                Response.Redirect("~/Default.aspx", false);
+                if (!(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text)) && isEmail(txtEmail.Text))
+                {
+                    usuario.Email = txtEmail.Text;
+                    usuario.Pass = txtPass.Text;
+                    usuarioNegocio.registrarse(usuario);
+                    Session.Add("Usuario", usuario);
+                    Response.Redirect("~/Default.aspx", false);
+                }
+                camposVacios();
+
             }
-            else
+            catch (Exception ex)
             {
-                //Enviar a pagina de error por datos incorrectos
+                cargarError(ex);
             }
-            camposVacios();
         }
         private bool isEmail(string email)
         {
-            if (string.IsNullOrEmpty(email)) 
+            if (string.IsNullOrEmpty(email))
                 return false;
             try
             {
@@ -62,6 +66,11 @@ namespace Web
                 txtPass.CssClass = "form-control is-invalid";
             else
                 txtPass.CssClass = "form-control";
+        }
+        private void cargarError(Exception ex)
+        {
+            Session.Add("Error", ex.ToString());
+            Response.Redirect("~/Error.aspx", false);
         }
     }
 }

@@ -20,22 +20,29 @@ namespace Web
         protected void btnIngresar_Click(object sender, EventArgs e)
         {
             Usuario usuario = new Usuario();
-            if (!(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text)))
+            try
             {
-                usuario.Email = txtEmail.Text;
-                usuario.Pass = txtPass.Text;
-                UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-                if (usuarioNegocio.logIn(usuario))
+                if (!(string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtPass.Text)))
                 {
-                    Session.Add("Usuario", usuario);
-                    Response.Redirect("~/Default.aspx", false);
+                    usuario.Email = txtEmail.Text;
+                    usuario.Pass = txtPass.Text;
+                    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                    if (usuarioNegocio.logIn(usuario))
+                    {
+                        Session.Add("Usuario", usuario);
+                        Response.Redirect("~/Default.aspx", false);
+                    }
+                    else
+                    {
+                        cargarError("Usuario y/o contraseña incorrecto");
+                    }
                 }
-                else
-                {
-                    //Enviar pagina de error de error con su usuario o contraseña
-                }
+                camposVacios();
             }
-            camposVacios();
+            catch (Exception ex)
+            {
+                cargarError(ex.ToString());
+            }
         }
         private void camposVacios()
         {
@@ -48,6 +55,11 @@ namespace Web
                 txtPass.CssClass = "form-control is-invalid";
             else
                 txtPass.CssClass = "form-control";
+        }
+        private void cargarError(string ex)
+        {
+            Session.Add("Error", ex);
+            Response.Redirect("~/Error.aspx", false);
         }
     }
 }
