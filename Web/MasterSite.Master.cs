@@ -1,4 +1,6 @@
-﻿using Negocio;
+﻿using Dominio;
+using Herramienta;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,28 @@ namespace Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                if (Seguridad.sessionActiva(Session["Usuario"]))
+                {
+                    Usuario user = (Usuario)Session["Usuario"];
+                    lblEmailUser.Text = user.Email;
+                    if(!string.IsNullOrEmpty(user.UrlImagen))
+                        imgUser.ImageUrl = "~/ImgUsers/" + user.UrlImagen;
+                    else
+                        imgUser.ImageUrl = "~/ImgUsers/SinFotoPerfil.jpg";
+                }
+                else if (!Seguridad.sessionActiva(Session["Usuario"]))
+                {
+                    imgUser.ImageUrl = "~/ImgUsers/SinFotoPerfil.jpg";
+                }
+            }
+        }
+
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Remove("Usuario");
+            Response.Redirect("Default.aspx", false);
         }
     }
 }

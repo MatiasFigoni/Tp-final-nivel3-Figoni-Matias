@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Herramienta;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,18 @@ namespace Web
             {
                 if (!IsPostBack)
                 {
-                    if (Session["Usuario"] != null)
+                    if (Seguridad.sessionActiva(Session["Usuario"]))
                     {
                         Usuario user = (Usuario)Session["Usuario"];
+                        if (string.IsNullOrEmpty(user.UrlImagen))
+                            imgImagenPerfil.ImageUrl = "~/ImgUsers/SinFotoPerfil.jpg";
+                        else
+                            imgImagenPerfil.ImageUrl = "~/ImgUsers/" + user.UrlImagen;
+
                         txtEmail.Text = user.Email;
                         txtContrasenia.Text = user.Pass;
                         txtNombre.Text = user.Nombre == null ? "" : user.Nombre;
                         txtApellido.Text = user.Apellido == null ? "" : user.Apellido;
-                        imgImagenPerfil.ImageUrl = user.UrlImagen == null ? "" : user.UrlImagen;
                     }
                 }
             }
@@ -49,7 +54,12 @@ namespace Web
                 }
                 if (txtContrasenia.Text != usuario.Pass)
                 {
-                    //notificar con mail el cambio de contraseña
+                    EmailService emailService = new EmailService();
+                    emailService.armarCorreo(
+                        usuario.Email,
+                        "Cambio de contraseña", 
+                        usuario.Nombre + " se ha detectado un cambio de contraseña de su cuenta: " + usuario.Email + ", si no fue usted contactese con el mail de soporte...");
+                    emailService.enviarEmail();
                 }
                 usuario.Pass = txtContrasenia.Text;
                 usuario.Nombre = txtNombre.Text;
@@ -60,10 +70,10 @@ namespace Web
                 Session.Add("Usuario", usuario);
 
                 //Leer imagen
-                //Image img = (Image)Master.FindControl("imgPerfilUser");
-                //img.ImageUrl = "~/Images/" + usuario.UrlImagen;
-                //imgImagenPerfil.ImageUrl = "~/Images/" + usuario.UrlImagen;
-                //Response.Redirect("~/Default.aspx", false);
+                Image img = (Image)Master.FindControl("imgUser");
+                img.ImageUrl = "~/ImgUSers/" + usuario.UrlImagen;
+                imgImagenPerfil.ImageUrl = "~/ImgUsers/" + usuario.UrlImagen;
+                Response.Redirect("~/Default.aspx", false);
             }
             catch (Exception ex)
             {
