@@ -88,6 +88,7 @@
     <Content Include="DescripcionArticulo.aspx" />
     <Content Include="ListadoArticulos.aspx" />
     <Content Include="LogInUsuario.aspx" />
+    <Content Include="ModPerfilUsuario.aspx" />
     <Content Include="RegistrarUsuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -140,6 +141,13 @@
     <Compile Include="MasterSite.Master.designer.cs">
       <DependentUpon>MasterSite.Master</DependentUpon>
     </Compile>
+    <Compile Include="ModPerfilUsuario.aspx.cs">
+      <DependentUpon>ModPerfilUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModPerfilUsuario.aspx.designer.cs">
+      <DependentUpon>ModPerfilUsuario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrarUsuario.aspx.cs">
       <DependentUpon>RegistrarUsuario.aspx</DependentUpon>
@@ -182,9 +190,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AccesoDatos\AccesoDatos.csproj">
+    <ProjectReference Include="..\AccesoDatos\Herramienta.csproj">
       <Project>{2059dad0-1f3c-47a1-82c7-3a1595cc489b}</Project>
-      <Name>AccesoDatos</Name>
+      <Name>Herramienta</Name>
     </ProjectReference>
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{07320212-f943-4bad-811e-c143021db410}</Project>
@@ -194,6 +202,9 @@
       <Project>{16ccb738-eeb7-4e00-a053-50ca35df6cd8}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ImgUsers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -64,7 +64,7 @@
                     <Columns>
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                         <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
-                        <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+                        <%--<asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />--%>
                         <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                         <asp:BoundField HeaderText="Categoria" DataField="Categoria.Descripcion" />
                         <asp:BoundField HeaderText="Precio" DataField="Precio" />

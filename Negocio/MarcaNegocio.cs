@@ -1,4 +1,4 @@
-﻿using AccesoDatos;
+﻿using Herramienta;
 using Dominio;
 using System;
 using System.Collections.Generic;
@@ -10,11 +10,11 @@ namespace Negocio
 {
     public class MarcaNegocio
     {
-        private Datos datos;
+        private AccesoDatos datos;
         public List<Marca> listar()
         {
             List<Marca> lista = new List<Marca>();
-            datos = new Datos();
+            datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("select Id,Descripcion from MARCAS");

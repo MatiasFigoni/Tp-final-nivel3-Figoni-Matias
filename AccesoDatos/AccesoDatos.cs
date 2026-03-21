@@ -7,14 +7,14 @@ using System.Data.SqlClient;
 using System.Xml.Schema;
 using System.Globalization;
 
-namespace AccesoDatos
+namespace Herramienta
 {
-    public class Datos
+    public class AccesoDatos
     {
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
-        public Datos()
+        public AccesoDatos()
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
             comando = new SqlCommand();

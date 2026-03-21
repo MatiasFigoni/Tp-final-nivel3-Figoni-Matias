@@ -25,7 +25,7 @@ namespace Web
             {
                 usuario.Email = txtEmail.Text;
                 usuario.Pass = txtPass.Text;
-                usuarioNegocio.Registrarse(usuario);
+                usuarioNegocio.registrarse(usuario);
                 Session.Add("Usuario", usuario);
                 Response.Redirect("~/Default.aspx", false);
             }

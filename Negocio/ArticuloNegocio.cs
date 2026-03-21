@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
-using AccesoDatos;
+using Herramienta;
 
 namespace Negocio
 {
     public class ArticuloNegocio
     {
-		Datos datos;
+        AccesoDatos datos;
 
 		public List<Articulo> listar()
         {
 			List<Articulo> listaArticulo = new List<Articulo>();
-			datos = new Datos();
+            datos = new AccesoDatos();
 			try
 			{
 				datos.setearConsulta("select A.Id, A.Codigo, A.Descripcion, A.Nombre, A.Precio, A.ImagenUrl, C.Descripcion 'Categoria', M.Descripcion 'Marca', C.Id 'IdCategoria',M.Id 'IdMarca' from ARTICULOS A, CATEGORIAS C, MARCAS M where A.IdCategoria = C.Id and A.IdMarca = M.Id");
@@ -53,7 +53,7 @@ namespace Negocio
         }
         public void agregar(Articulo articulo)
         {
-            datos = new Datos();
+            datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("insert into ARTICULOS(Codigo,Nombre,Descripcion,IdMarca,IdCategoria,ImagenUrl,Precio) values (@cod,@nom,@desc,@idM,@idC,@img,@pre)");
@@ -74,7 +74,7 @@ namespace Negocio
         }
         public void modificar(Articulo articulo)
         {
-            datos = new Datos();
+            datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo = @cod, Nombre = @nom, Descripcion = @desc,IdMarca = @idM,IdCategoria = @idC,ImagenUrl = @img,Precio = @precio where Id = @id");
@@ -96,7 +96,7 @@ namespace Negocio
         }
         public void eliminar(Articulo articulo)
         {
-            datos = new Datos();
+            datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("delete from ARTICULOS where Id = @id");
@@ -112,7 +112,7 @@ namespace Negocio
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();
-            datos = new Datos();
+            datos = new AccesoDatos();
             try
             {
                 string consulta = "select A.Id,Codigo,Nombre,A.Descripcion,IdMarca,M.Descripcion \"Marca\",IdCategoria,C.Descripcion \"Categoria\",ImagenUrl,Precio from ARTICULOS A,MARCAS M,CATEGORIAS C where A.IdMarca = M.Id and A.IdCategoria = C.Id and ";

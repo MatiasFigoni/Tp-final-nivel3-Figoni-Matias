@@ -1,11 +1,11 @@
-﻿using AccesoDatos;
-using Dominio;
+﻿using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Herramienta;
 
 namespace Negocio
 {
@@ -13,7 +13,7 @@ namespace Negocio
     {
         public bool logIn(Usuario user)
         {
-            Datos datos = new Datos();
+            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("select Id,email,pass,nombre,apellido,urlImagenPerfil,admin from USERS where email = @email and pass = @pass");
@@ -41,14 +41,33 @@ namespace Negocio
             finally { datos.cerrarConexion(); }
 
         }
-        public void Registrarse(Usuario user)
+        public void registrarse(Usuario user)
         {
-            Datos datos = new Datos();
+            AccesoDatos datos = new AccesoDatos();
             try
             {
                 datos.setearConsulta("insert into USERS (email,pass) values (@email,@pass)");
                 datos.setearParametro("@email",user.Email);
                 datos.setearParametro("@pass",user.Pass);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { datos.cerrarConexion(); }
+        }
+        public void modificarPerfil(Usuario user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("update USUARIOS set pass=@pass, Nombre = @nombre, Apellido=@apellido,UrlImagenPerfil=@img where Id = @id");
+                datos.setearParametro("@pass", user.Pass);
+                datos.setearParametro("@nombre", user.Nombre);
+                datos.setearParametro("@apellido", user.Apellido);
+                datos.setearParametro("@img", user.UrlImagen != null ? user.UrlImagen : "");
+                datos.setearParametro("@id", user.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
