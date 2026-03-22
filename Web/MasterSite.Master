@@ -22,8 +22,13 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="Default.aspx">Home</a>
-                        <a class="nav-link" href="ListadoArticulos.aspx">Listado articulos</a>
+                        <%if (Herramienta.Seguridad.sessionActiva(Session["Usuario"]))
+                            {
+                                if (Herramienta.Seguridad.isAdmin(Session["Usuario"]))
+                                { %>
+                        <a class="nav-link" href="ListadoArticulos.aspx">Listado articulos</a><%}%>
                         <a class="nav-link" href="ModPerfilUsuario.aspx">Mi perfil</a>
+                        <a class="nav-link" href="ArticulosFavoritosUser.aspx?id=<%=((Dominio.Usuario)Session["Usuario"]).Id.ToString() %>">Mis favoritos</a><%} %>
                     </div>
                 </div>
             </div>
@@ -32,7 +37,7 @@
                     {%>
                 <asp:Button ID="btnCerrarSesion" runat="server" Text="Salir" CssClass="btn btn-primary me-2" OnClick="btnCerrarSesion_Click" />
                 <asp:Label ID="lblEmailUser" runat="server" CssClass="nav-link text-light-emphasis me-2"></asp:Label>
-                <asp:Image ID="imgUser" runat="server" CssClass="rounded-5" Height="40px" Width="40px"/>
+                <asp:Image ID="imgUser" runat="server" CssClass="rounded-5" Height="40px" Width="40px" />
                 <%}
                     else
                     {%>

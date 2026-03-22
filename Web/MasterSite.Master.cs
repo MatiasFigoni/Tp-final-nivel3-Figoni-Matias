@@ -14,20 +14,17 @@ namespace Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 if (Seguridad.sessionActiva(Session["Usuario"]))
                 {
                     Usuario user = (Usuario)Session["Usuario"];
                     lblEmailUser.Text = user.Email;
-                    if(!string.IsNullOrEmpty(user.UrlImagen))
+                    if (!string.IsNullOrEmpty(user.UrlImagen))
                         imgUser.ImageUrl = "~/ImgUsers/" + user.UrlImagen;
                     else
                         imgUser.ImageUrl = "~/ImgUsers/SinFotoPerfil.jpg";
-                }
-                else if (!Seguridad.sessionActiva(Session["Usuario"]))
-                {
-                    imgUser.ImageUrl = "~/ImgUsers/SinFotoPerfil.jpg";
                 }
             }
         }

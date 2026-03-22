@@ -12,12 +12,14 @@ namespace Web
 {
     public partial class ModPerfilUsuario : System.Web.UI.Page
     {
+        public bool ConfirmarModificacion { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 if (!IsPostBack)
                 {
+                    ConfirmarModificacion = false;
                     if (Seguridad.sessionActiva(Session["Usuario"]))
                     {
                         Usuario user = (Usuario)Session["Usuario"];
@@ -32,6 +34,7 @@ namespace Web
                         txtApellido.Text = user.Apellido == null ? "" : user.Apellido;
                     }
                 }
+
             }
             catch (Exception ex)
             {
@@ -54,10 +57,11 @@ namespace Web
                 }
                 if (txtContrasenia.Text != usuario.Pass)
                 {
+                    //Notificacion por mail de cambio de contraseña
                     EmailService emailService = new EmailService();
                     emailService.armarCorreo(
                         usuario.Email,
-                        "Cambio de contraseña", 
+                        "Cambio de contraseña",
                         usuario.Nombre + " se ha detectado un cambio de contraseña de su cuenta: " + usuario.Email + ", si no fue usted contactese con el mail de soporte...");
                     emailService.enviarEmail();
                 }
@@ -68,12 +72,16 @@ namespace Web
                 //Guardar datos
                 usuarioNegocio.modificarPerfil(usuario);
                 Session.Add("Usuario", usuario);
+                ConfirmarModificacion = true;
 
                 //Leer imagen
-                Image img = (Image)Master.FindControl("imgUser");
-                img.ImageUrl = "~/ImgUSers/" + usuario.UrlImagen;
-                imgImagenPerfil.ImageUrl = "~/ImgUsers/" + usuario.UrlImagen;
-                Response.Redirect("~/Default.aspx", false);
+                if (!string.IsNullOrEmpty(usuario.UrlImagen))
+                {
+                    Image img = (Image)Master.FindControl("imgUser");
+                    img.ImageUrl = "~/ImgUSers/" + usuario.UrlImagen;
+                    imgImagenPerfil.ImageUrl = "~/ImgUsers/" + usuario.UrlImagen;
+                }
+                //Response.Redirect("~/Default.aspx", false);
             }
             catch (Exception ex)
             {

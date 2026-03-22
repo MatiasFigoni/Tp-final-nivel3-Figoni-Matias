@@ -27,6 +27,7 @@
                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
+
         <div class="col">
             <!--Imagen Perfil-->
             <div class="mb-3">
@@ -34,10 +35,21 @@
                 <asp:FileUpload ID="fupImagenPerfil" runat="server" CssClass="form-control" />
             </div>
             <div class="text-center">
-                <asp:Image ID="imgImagenPerfil" runat="server" CssClass="img-thumbnail" Width="350px" Height="350px" />
+                <asp:Image ID="imgImagenPerfil" runat="server" CssClass="img-thumbnail" Width="350px" Height="350px"/>
             </div>
         </div>
     </div>
+    <%if (ConfirmarModificacion)
+        { %>
+    <div class="toast align-items-center show text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; bottom: 20px; right: 20px; z-index: 1050;">
+        <div class="d-flex">
+            <div class="toast-body">
+                <span>Usuario modificado correctamente!</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    <%} %>
     <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" Text="Guardar" OnClick="btnGuardar_Click" />
     <a href="Default.aspx" class="btn btn-outline-secondary">Volver</a>
 </asp:Content>
