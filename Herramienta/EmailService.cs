@@ -16,7 +16,7 @@ namespace Herramienta
         public EmailService()
         {
             server = new SmtpClient("sandbox.smtp.mailtrap.io", 2525);
-            server.Credentials = new NetworkCredential("506ca30e2c5e8f", "1675e7789d81a0");//SACAR CUENTA GMAIL
+            server.Credentials = new NetworkCredential("506ca30e2c5e8f", "1675e7789d81a0");
             server.EnableSsl = true;
             server.Port = 587;
             server.Host = "sandbox.smtp.mailtrap.io";
@@ -25,7 +25,6 @@ namespace Herramienta
         {
             email = new MailMessage();
             //email.From = new MailAddress("noresponder@prueba.com");
-            //Esta es la unica forma que acepte un cambio de nombre Goolge
             email.From = new MailAddress("ArticulosPitucos@mailtrap.com", "Articulos Pitucos");
             email.To.Add(emailDestino);
             email.Subject = asunto;

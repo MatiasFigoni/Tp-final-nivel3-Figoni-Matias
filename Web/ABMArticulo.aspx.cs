@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Herramienta;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,12 @@ namespace Web
         {
             try
             {
+                if (Seguridad.sessionActiva(Session["Usuario"]))
+                    if (!Seguridad.isAdmin(Session["Usuario"]))
+                    {
+                        cargarError("No tienes perfil de administrador...");
+                    }
+
                 if (Request.QueryString["id"]!=null) 
                     MostrarBotonEliminar = true;
                 MostrarConfirmacion = false;
@@ -57,7 +64,7 @@ namespace Web
             }
             catch (Exception ex)
             {
-                cargarError(ex);
+                cargarError(ex.ToString());
             }
         }
 
@@ -73,7 +80,7 @@ namespace Web
             }
             catch (Exception ex)
             {
-                cargarError(ex);
+                cargarError(ex.ToString());
             }
         }
 
@@ -89,7 +96,7 @@ namespace Web
             }
             catch (Exception ex)
             {
-                cargarError(ex);
+                cargarError(ex.ToString());
             }
 
         }
@@ -142,9 +149,9 @@ namespace Web
             MostrarConfirmacion = true;
 
         }
-        private void cargarError(Exception ex)
+        private void cargarError(string ex)
         {
-            Session.Add("Error", ex.ToString());
+            Session.Add("Error", ex);
             Response.Redirect("~/Error.aspx", false);
         }
     }

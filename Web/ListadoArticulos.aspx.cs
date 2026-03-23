@@ -17,6 +17,9 @@ namespace Web
             FiltroAvanzado = cbxActivarFiltroAvanzado.Checked;
             if (!IsPostBack)
             {
+                //Por defecto al apretar Enter acciona el boton "Salir" de la MasterPage,
+                //aca le decimos que la prioridad del Enter sea el btnFiltroAvanzado
+                this.Form.DefaultButton = btnFiltroAvanzado.UniqueID;
                 try
                 {
                     ArticuloNegocio articuloNegocio = new ArticuloNegocio();
@@ -46,6 +49,8 @@ namespace Web
 
         private bool onlyNumbers(string cadena)
         {
+            //Intentar que acepte decimales
+            char a;
             foreach (char c in cadena)
             {
                 if (!char.IsNumber(c))

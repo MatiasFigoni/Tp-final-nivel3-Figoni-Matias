@@ -8,12 +8,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace Web
 {
     public partial class MasterSite : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Page is Default || Page is Error || Page is RegistrarUsuario || Page is LogInUsuario))
+            {
+                if (!Seguridad.sessionActiva(Session["Usuario"]))
+                {
+                    Response.Redirect("LogInUsuario.aspx", false);
+                }
+            }
 
             if (!IsPostBack)
             {
@@ -32,7 +40,7 @@ namespace Web
         protected void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             Session.Remove("Usuario");
-            Response.Redirect("Default.aspx", false);
+            Response.Redirect("LogInUsuario.aspx", false);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Web
 {
 
 
-    public partial class Default
+    public partial class LogInUsuario
     {
 
         /// <summary>
